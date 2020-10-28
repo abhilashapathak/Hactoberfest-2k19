@@ -1,0 +1,187 @@
+/*
+Q 2) Define a class Item having the private data members; itemcode, itemname, category,
+price, discount, and quantity. In addition, define a constant MAXQUANTITY to set a
+uppper limit of the stock of the item. The class must have folllowing methods:
+ A default constructor
+ A parameterized constructor
+ A displayitem() method to display the detail of an item.
+ An updateDetail(price,discount) to update the price and discount rate of an
+item.
+ An addItems(n) method to add n number of items to quantity field provided
+total quantity does not go beyond MAXQUANTITY.
+ A sellItem(n) method to sell n number of items to customer(s) provided
+number of item requested is available.
+ A compareItem(Item) method to compare and display the fields of two item in
+an appropriate format.
+package assignment3;
+*/
+import java.util.*;
+class Item
+{
+   
+    private int itemcode;
+    private String itemname;
+     private String category;
+    private int price;
+    private int discount;
+    private int quantity;
+    final int max_quant=100;
+    private int count;
+    Item()
+    {
+        itemcode=0;
+        itemname=null;
+        category=null;
+        price=0;
+        discount=0;
+        quantity=0;
+    }
+    Item(int itemcode,String itemname,String category,int price,int discount,int quantity)
+    {
+        this.itemcode=itemcode;
+        this.itemname=itemname;
+        this.category=category;
+        this.discount=discount;
+        this.price=price;
+        this.quantity=quantity;
+        count++;
+    }
+    void updateDetail(int price,int discount)
+    {
+        this.price=price;
+        this.discount=discount;
+         System.out.println("Item detail updated");
+    }
+    void displayItem()
+    {
+        System.out.println("Item code : "+itemcode);
+        System.out.println("Item name : "+itemname);
+        System.out.println("Item category : "+category);
+        System.out.println("Item discount : "+discount);
+        System.out.println("Item price : "+price);
+        System.out.println("Item quantity : "+quantity);
+    }
+    void addItem(int n)
+    {
+        if((n+quantity)>max_quant)
+            System.out.println("item can't be added. not enough capacity");
+        else
+            quantity=quantity+n;
+         System.out.println("item added");
+    }
+    void sellItem(int n)
+    {
+        if(quantity>=n)
+        {
+            quantity=quantity-n;
+             System.out.println(n+" item sold"); 
+        }
+        else
+             System.out.println("not enough item to sell");
+    }
+    void compareItem(Item a)
+    {
+         System.out.println("\t\t\t\tItem comparison :");
+          System.out.println("item code:" );
+          System.out.println(itemcode+" "+a.itemcode)  ; 
+          System.out.println("item name:" );
+          System.out.println(itemname+" "+a.itemname)  ; 
+          System.out.println("item category :" );
+          System.out.println(category+" "+a.category)  ; 
+          System.out.println("item discount :" );
+          System.out.println(discount+" "+a.discount)  ; 
+          System.out.println("item price :" );
+          System.out.println(price+" "+a.price)  ;  
+          System.out.println("item quantity:" );
+          System.out.println(quantity+" "+a.quantity)  ;  
+    }
+    void getDetails()
+    {   
+        Scanner inp=new Scanner(System.in);
+        System.out.println("Enter item code :");
+        itemcode=inp.nextInt();
+        System.out.println("Enter item name :");
+        itemname=inp.next();
+        System.out.println("Enter item category :");
+        category=inp.next();
+        System.out.println("Enter item discount :");
+        discount=inp.nextInt();
+        System.out.println("Enter item price :");
+        price=inp.nextInt();
+        System.out.println("Enter item quantity :");
+        quantity=inp.nextInt();
+        System.out.println("Item added");
+        
+    }
+}
+
+public class program2 {
+    public static void main(String[] args)
+    {
+        Item first=new Item();
+         
+         Scanner inp=new Scanner(System.in);
+            while(true)
+          {System.out.println("\t\t\t\tMENU ");
+           System.out.println(" 1. Update Detail ");
+          System.out.println(" 2. Display Item  ");
+          System.out.println(" 3. Add Item quantity ");
+          System.out.println(" 4. Sell item ");
+          System.out.println(" 5.  Compare item");
+          System.out.println(" 6. Get Item Details ");
+           System.out.println(" 7. Exit ");
+           int choice;
+           System.out.println("Choice :");
+   
+           choice=inp.nextInt();
+           switch(choice)
+           {
+               case 1:
+                   int price,discount;
+                    System.out.println(" Enter price to be updated : ");
+                     price=inp.nextInt();
+                    System.out.println(" Enter discount to be updated : ");
+                    discount=inp.nextInt();
+                   first.updateDetail(price, discount);
+                   break;
+               case 2:
+                  first.displayItem();
+                   break;
+               case 3:
+                   int n;
+                   System.out.println(" Enter number of quantity to be added : ");
+                   n=inp.nextInt();
+                   first.addItem(n);
+                   break;
+               case 4:
+                  
+                 int n1;
+                   System.out.println(" Enter number of quantity to be sold : ");
+                   n1=inp.nextInt();
+                   first.sellItem(n1);
+                   break;
+               case 5:
+                  Item c5=new Item();
+                   Item c6=new Item();
+                   System.out.println("Enter two items :");
+                   c5.getDetails();
+                   c6.getDetails();
+                 c5.compareItem(c6);
+                   break;
+               case 6:
+                  first.getDetails();
+                   break;
+                   
+               case 7:
+                   System.exit(0);
+                   
+                   
+           
+          }
+    }
+       
+         
+                 
+        
+    }
+}
